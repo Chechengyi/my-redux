@@ -8,3 +8,5 @@ export default function compose(...funcs) {
     }
     return funcs.reduce( (ret,item)=>(...args)=>ret(item(...args)) )
 }
+
+

@@ -6,7 +6,7 @@ import reducers from './reducer'
 import Home from './screen/Home'
 import {thunk, ceshi} from './my-redux/my-redux-thunk'
 import registerServiceWorker from './registerServiceWorker';
-import Provider from './my-redux/react-redux'
+import Provider from './my-redux/react-redux-old'
 const store = createStore(reducers, compose(applyMiddleware(ceshi, thunk)))
 store.subscribe( function () {
     console.log('订阅了')

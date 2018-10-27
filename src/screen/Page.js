@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Context } from '../context'
 
 export default class Page extends React.Component{
 
@@ -12,6 +13,15 @@ export default class Page extends React.Component{
     }
 
     render () {
-        return <div>页面组件{this.context.address}</div>
+        return <Context.Consumer>
+          {
+              context=>(
+                <div>
+                  {console.log(context)}
+                  页面组件
+                </div>
+              )
+          }
+        </Context.Consumer>
     }
 }

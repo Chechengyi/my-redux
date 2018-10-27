@@ -1,13 +1,16 @@
-import React from 'react'
-import { connect } from '../my-redux/react-redux'
+import React, { createContext } from 'react'
+import { connect } from '../my-redux/react-redux-old'
 import { addAge, removeAge, timeAge } from '../redux/ccy.redux'
 import Page from './Page'
 import PropTypes from 'prop-types'
+import Modal from '../common/modal'
+import { Context } from '../context'
 
 // @connect( state=>({
 //     name: state.user.name,
 //     age: state.user.age
 // }) )
+
 class Home extends React.Component{
 
     constructor(props, context){
@@ -17,15 +20,18 @@ class Home extends React.Component{
         }
     }
 
-    static childContextTypes={
-        address: PropTypes.string
-    }
 
-    getChildContext(){
-        return {
-            address: this.state.address
-        }
-    }
+
+    //  旧版本 context 传递方式
+    // static childContextTypes={
+    //     address: PropTypes.string
+    // }
+    //
+    // getChildContext(){
+    //     return {
+    //         address: this.state.address
+    //     }
+    // }
 
     componentDidMount(){
         console.log(this.props)
@@ -42,8 +48,12 @@ class Home extends React.Component{
         }
     }
 
+  handleModal =e=> {
+        Modal.alert()
+  }
+
     render(){
-        return <div>
+        return <Context.Provider value={{name: 'ccy'}}>
             <div style={{textAlign: 'center'}} >
                 {this.props.name}
             </div>
@@ -53,8 +63,13 @@ class Home extends React.Component{
                 <button onClick={ e=>this.handleClick('remove') } >减</button>
                 <button onClick={ e=>this.handleClick('time') } >过了很久</button>
             </div>
+            <div>
+                <button
+                    onClick={e=>this.handleModal()}
+                >modal</button>
+            </div>
             <Page />
-        </div>
+        </Context.Provider>
     }
 }
 
